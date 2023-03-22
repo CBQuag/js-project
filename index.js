@@ -1,7 +1,11 @@
 import User from "./user.js";
 import Movie from "./movie.js";
 import Prompt from "@cloud-technology/cli-prompt"
+let firstTime=true;
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 
 //Movie Objects
 const mina=new Movie('Minari',2020,'Lee Isaac Chung',115);
@@ -11,15 +15,23 @@ const andre=new Movie('Andrei Rublev',1973,'Andrei Tarkovsky',186);
 const wild=new Movie('Wild at Heart',1990,'David Lynch',125);
 const napo=new Movie('Napoleon',1927,'Abel Gance',330);
 
+//Sets an Array of Movie Objects to take from. As movies get added, inputting them will be easier.
 let moviesArray=[mina,paths,kino,andre,wild,napo];
 
+//Sets up an Array for User Objects, which allows for dynamically switching between users
 let users=[];
 
 let prompt;
 let userIndex=0;
 let first=true;
 do{
-    if(first){prompt='add user';first=false;}else{prompt=await Prompt("Input Selection: ");}
+    if(first){
+        console.log('Welcome To the Movie List Service!');
+        prompt='add user';first=false;
+    }else{
+        prompt=await Prompt("Input Selection ('help' for options, 'exit' to quit): ");
+    }
+    console.log('');
     switch (prompt.toLowerCase()){
 
         //Takes input to make a new User Object with a given name, adds them to an array of users,
@@ -28,7 +40,6 @@ do{
             let use=new User(await Prompt('Enter Name of User: '));
             users.push(use);
             userIndex=users.length-1;
-            console.log('');
             break;
 
         //Takes input and compares that to the name property inside the User objects of the User Array
@@ -37,8 +48,8 @@ do{
             let switchName=await Prompt('Enter Name to Switch to User: ');
             if(users.findIndex(x=>x.name==switchName)!==-1){
                 userIndex=users.findIndex(x=>x.name==switchName);
-                console.log(`Switched to ${users[userIndex].name}'s Account.\n`);
-            }else{console.log('No Such User.\n');}
+                console.log(`Switched to ${users[userIndex].name}'s Account.`);
+            }else{console.log('No Such User.');}
             break;
 
         //First, this accepts a title, and if that title appears in the name property of a Movie object already in
@@ -60,7 +71,6 @@ do{
             watch=='y'?w=true:null;
             let s=await Prompt('Score: ')
             users[userIndex].addMovie(m,w,s)
-            console.log('');
             break;
         
         //Takes the name of a movie and a new score and passes them to the finishMovie function to set watched to true and 
@@ -85,20 +95,39 @@ do{
             users[userIndex].displayMovieList();
             break;
 
+        //Displays a list of options for navigation
         case 'help':
             console.log(`
-            --NAVIGATION--
-            "add user" or "u"     will add a new user to the list of users and assign them as the current user
-            "switch" or "sw"      will assign the current user to a different user
-            "add movie" or "m"    will add a movie to the current user's movie list
-            "finish movie" or "f" will set a certain movie's watched status to true and optionally adjust the score
-            "remove movie" or "r" will remove a movie from the current user's list
-            "score or "sc"        will change a given movie's score
-            "display" or "d"      will display the current user's movie list
-            --Press Any Other Key To Exit--`)
+--NAVIGATION--
+"add user" or "u"     will add a new user to the list of users and assign them as the current user
+"switch" or "sw"      will assign the current user to a different user
+"add movie" or "m"    will add a movie to the current user's movie list
+"finish movie" or "f" will set a certain movie's watched status to true and optionally adjust the score
+"remove movie" or "r" will remove a movie from the current user's list
+"score or "sc"        will change a given movie's score
+"display" or "d"      will display the current user's movie list
+--Press Any Other Key To Exit--`)
+            break;
         
         default:
-            prompt='exit';
+            if(prompt!='exit'){
+                if(firstTime){
+                console.log("Improper Input. Type help for more options");
+                firstTime=false;
+                }else{
+                  let insult=new Array("what do you want me to do with that, funny guy?",
+                    "You having a good time over there? You enjoying yourself? Put in the right input.",
+                    "Yeah, you can just type whatever you want there, can't you? That's so much fun, isn't it? Just throw caution to the wind and waste everyone's time instead of using this brilliant code properly.",
+                    "sus",
+                    "Bruh stop",
+                    "Why would you even put that in? What would possess you to do something like that?",
+                    "I'm sending that comment to the FBI",
+                    "Are you having a stroke?",
+                    "I don't get it. I just don't get why you're doing this");
+                  console.log(insult[getRandomInt(insult.length)]);        
+                }
+            }
             break;
     }
+    console.log('');
 }while(prompt.toLowerCase()!='exit');

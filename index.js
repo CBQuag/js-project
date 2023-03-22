@@ -10,7 +10,7 @@ function getRandomInt(max) {
 //Movie Objects
 const mina=new Movie('Minari',2020,'Lee Isaac Chung',115);
 const paths=new Movie('Paths of Glory',1957,'Stanley Kubrick',88);
-const kino=new Movie('The Emoji Movie', 2017,'Tony Leondis',86)
+const kino=new Movie('The Emoji Movie', 2017,'Tony Leondis',86);
 const andre=new Movie('Andrei Rublev',1973,'Andrei Tarkovsky',186);
 const wild=new Movie('Wild at Heart',1990,'David Lynch',125);
 const napo=new Movie('Napoleon',1927,'Abel Gance',330);

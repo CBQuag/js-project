@@ -94,7 +94,8 @@ do{
         case 'display':case 'd':
             users[userIndex].displayMovieList();
             break;
-
+        
+        //Shows total watch time for a current user
         case 'watch time':case 't':
             users[userIndex].displayWatchTime();
             break;
@@ -110,6 +111,7 @@ do{
 "remove movie" or "r" will remove a movie from the current user's list
 "score or "sc"        will change a given movie's score
 "display" or "d"      will display the current user's movie list
+"watch time" or "t"   will show total watch time in hours and minutes
 --Press Any Other Key To Exit--`)
             break;
         

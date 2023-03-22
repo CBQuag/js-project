@@ -38,6 +38,7 @@ export default class User{
         console.log();
     }
 
+    //Takes the total of all runtimes and converts to hours and minutes
     displayWatchTime(){
         let total=0;
         this.movieList.forEach(m=>total+=m.mov.runtime);

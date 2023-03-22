@@ -38,4 +38,10 @@ export default class User{
         console.log();
     }
 
+    displayWatchTime(){
+        let total=0;
+        this.movieList.forEach(m=>total+=m.mov.runtime);
+        console.log('Watched a total of: '+Math.floor(total/60)+' Hours and '+total%60+' Minutes');
+    }
+
 }

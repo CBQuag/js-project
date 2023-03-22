@@ -95,6 +95,10 @@ do{
             users[userIndex].displayMovieList();
             break;
 
+        case 'watch time':case 't':
+            users[userIndex].displayWatchTime();
+            break;
+
         //Displays a list of options for navigation
         case 'help':
             console.log(`

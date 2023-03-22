@@ -110,7 +110,7 @@ do{
             break;
         
         default:
-            if(prompt!='exit'){
+            if(prompt.toLowerCase()!='exit'){
                 if(firstTime){
                 console.log("Improper Input. Type help for more options");
                 firstTime=false;
